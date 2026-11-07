@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="ms-MY">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>幻灯片与音乐控制器</title>
+<title>Kawalan Slaid dan Muzik</title>
 <style>
 :root{color-scheme:light;--ink:#253044;--muted:#667085;--accent:#536dfe;--line:#e6e9f0;--paper:#fff}
 *{box-sizing:border-box}body{margin:0;padding:18px;background:#f5f7fb;color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}
@@ -22,29 +22,29 @@ button:hover{border-color:var(--accent);color:var(--accent)}button.primary{backg
 <body>
 <div class="shell">
   <header>
-    <div><div class="brand">幻灯片播放器</div><div class="small">上一页 / 下一页 · 音乐播放控制</div></div>
-    <div class="controls" aria-label="幻灯片导航">
-      <button id="prev" type="button">Previous</button>
+    <div><div class="brand">Pemain Slaid</div><div class="small">Slaid sebelumnya / seterusnya · Kawalan muzik</div></div>
+    <div class="controls" aria-label="Navigasi slaid">
+      <button id="prev" type="button">Sebelumnya</button>
       <span id="slideNo" aria-live="polite">1</span>
-      <button id="next" class="primary" type="button">Next</button>
+      <button id="next" class="primary" type="button">Seterusnya</button>
     </div>
   </header>
-  <div class="stage"><iframe id="slides" title="Google Slides 演示文稿" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+  <div class="stage"><iframe id="slides" title="Persembahan Google Slides" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
   <div class="audioBar">
-    <span class="track">背景音乐</span>
-    <button id="play" class="primary" type="button">▶ 播放/继续</button>
-    <button id="pause" type="button">⏸ 暂停</button>
-    <span id="audioState" class="small" aria-live="polite">正在尝试自动播放…</span>
+    <span class="track">Muzik latar</span>
+    <button id="play" class="primary" type="button">▶ Main / Sambung</button>
+    <button id="pause" type="button">⏸ Jeda</button>
+    <span id="audioState" class="small" aria-live="polite">Cuba main secara automatik…</span>
     <audio id="music" preload="auto" loop playsinline></audio>
-    <span class="hint">若浏览器拦截自动播放，请点击「播放」</span>
+    <span class="hint">Jika pelayar menyekat main automatik, klik “Main / Sambung”</span>
   </div>
-  <div class="notice">Google Slides 的画面在独立播放器中显示；本页的播放/暂停按钮控制下方音乐。网页无法遥控 Slides 内嵌的原生音轨。</div>
+  <div class="notice">Paparan Google Slides dipaparkan dalam pemain berasingan. Butang main dan jeda pada halaman ini mengawal muzik di bawah, bukan audio asal dalam Slides.</div>
 </div>
 <script>
 (() => {
-  // 请将此值改为演示文稿的 ID（来自 /presentation/d/…/edit 链接）。
+  // ID pembentangan diambil daripada pautan /presentation/d/…/edit.
   const presentationId = '1nNMgZoKokZwLLsQ9E9_kLZMP0kQ0SXzS9ghPYbP3qgQ';
-  // 第一页 ID 已从用户提供的链接确认是 p1。后续页按 p2、p3…切换。
+  // ID slaid pertama yang disahkan ialah p1. Slaid seterusnya menggunakan p2, p3 dan seterusnya.
   const embed = document.getElementById('slides');
   const music = document.getElementById('music');
   const state = document.getElementById('audioState');
@@ -64,12 +64,12 @@ button:hover{border-color:var(--accent);color:var(--accent)}button.primary{backg
   const audioFile = new URL('./atlasaudio-happy-ukulele-617574.mp3', location.href).toString();
   music.src = audioFile;
   async function playMusic() {
-    try { await music.play(); state.textContent = '音乐正在播放'; }
-    catch { state.textContent = '自动播放被浏览器拦截，请点击「播放」'; }
+    try { await music.play(); state.textContent = 'Muzik sedang dimainkan'; }
+    catch { state.textContent = 'Main automatik disekat. Klik “Main / Sambung”.'; }
   }
   document.getElementById('play').addEventListener('click', playMusic);
-  document.getElementById('pause').addEventListener('click', () => { music.pause(); state.textContent = '音乐已暂停'; });
-  music.addEventListener('ended', () => { state.textContent = '音乐已结束'; });
+  document.getElementById('pause').addEventListener('click', () => { music.pause(); state.textContent = 'Muzik dijeda'; });
+  music.addEventListener('ended', () => { state.textContent = 'Muzik telah tamat'; });
   showPage();
   playMusic();
 })();
